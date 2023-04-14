@@ -7,7 +7,8 @@ this = sys.modules[__name__]
 x_widget = widgets.IntSlider(min=0, max=100)
 y_widget = widgets.Dropdown(
     options=[0,1,2],
-    description='axis'
+    description='axis',
+    value = 0
 )
 
 def update_pos_range(*args):
