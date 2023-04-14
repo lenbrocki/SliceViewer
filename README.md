@@ -6,4 +6,4 @@ The image is expected to be an array (NumPy array, Torch tensor, ...)
 import sliceviewer
 sliceviewer.plot(img)
 ```
-<img src="https://github.com/lenbrocki/SliceViewer/blob/main/sample.gif" width="30%" height="30%"/>
+<img src="https://github.com/lenbrocki/SliceViewer/blob/main/sample_new.gif" width="30%" height="30%"/>
