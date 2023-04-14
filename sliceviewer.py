@@ -1,26 +1,32 @@
+from ipywidgets import interactive, fixed, widgets, interact
 import matplotlib.pyplot as plt
-from ipywidgets import interactive, fixed, IntSlider, Dropdown
-def update_pos_range(*args):
-    pos_widget.max = shape[axis_widget.value] - 1
+import sys
 
-def update(img, pos=10, axis=0):
-    if(axis == 0):
-        plt.matshow(img[pos,:,:], cmap="gray")
-    elif(axis == 1):
-        plt.matshow(img[:,pos,:], cmap="gray")
-    else:
-        plt.matshow(img[:,:,pos], cmap="gray")
-    plt.show()
+this = sys.modules[__name__]
+
+x_widget = widgets.IntSlider(min=0, max=100)
+y_widget = widgets.Dropdown(
+    options=[0,1,2],
+    description='axis'
+)
+
+def update_pos_range(*args):
+    x_widget.max = this.shape[y_widget.value] - 1
     
-def plot(img):
-    shape = img.shape
-    axis_default = 0
-    pos_widget = IntSlider(min=0, max=shape[axis_default] - 1)
-    axis_widget = Dropdown(
-        options=[0,1,2],
-        value=axis_default,
-        description='axis:',
-        disabled=False,
-    )
-    axis_widget.observe(update_pos_range, 'value')
-    return interactive(update, pos=pos_widget, axis=axis_widget, img=fixed(img))
+
+y_widget.observe(update_pos_range, 'value')
+
+def plotter(pos, axis, image):
+    if(axis == 0):
+        plt.matshow(image[pos,:,:], cmap="gray")
+    elif(axis == 1):
+        plt.matshow(image[:,pos,:], cmap="gray")
+    else:
+        plt.matshow(image[:,:,pos], cmap="gray")
+    plt.show()
+
+def plot(image):
+    this.shape = image.shape
+    x_widget.max = this.shape[0] - 1
+
+    return interact(plotter, pos=x_widget, axis=y_widget, image=fixed(image))
