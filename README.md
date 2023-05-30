@@ -6,7 +6,8 @@ ipywidget, matplotlib
 ## Usage
 Place sliceviewer.py in the same folder as the Jupyter notebook or in a folder visible to PYTHONPATH. Then, in the notebook usage is simple:
 ```python
-import sliceviewer
-sliceviewer.plot(img)
+from sliceviewer import sliceviewer
+g = sliceviewer(img)
+g.plot()
 ```
 <img src="https://github.com/lenbrocki/SliceViewer/blob/main/sample_new.gif" width="30%" height="30%"/>
