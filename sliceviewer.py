@@ -1,6 +1,6 @@
 from ipywidgets import widgets
 import matplotlib.pyplot as plt
-import numpy as np
+
 class sliceviewer:
     def __init__(self, image):
         self.image = image
@@ -9,17 +9,7 @@ class sliceviewer:
         plt.ioff()
         self.fig = plt.figure()
         plt.ion()
-
-        # init_arr is needed for plt.imshow() to be properly set up for printing of the image slices
-        init_arr = np.zeros(image.shape[1:]).astype(image.dtype)
-        init_arr[10,10] = image.max()
-        init_arr[20,10] = image.min()
-        self.im = plt.imshow(init_arr, cmap="gray")
-
-        # plot first slice on init
-        img_init = self.image[0,:,:]
-        self.im.set_data(img_init)
-        self.im.set_clim(img_init.min(), img_init.max())
+        self.im = plt.imshow(image[0,:,:], cmap="gray")
 
         # set up widgets
         self.slider = widgets.IntSlider(value=0, description="slice", min=0, max=image.shape[0])
